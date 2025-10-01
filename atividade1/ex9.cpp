@@ -5,55 +5,31 @@ struct fracao{
     int denominador;
 };
 
-int mult(int a, int b){
-    int min, maior = 1, maior_v = a, menor_v = b;
-    if (b > maior_v){
-        maior_v = b;
-    }
-    if (a < menor_v){
-        menor_v = a;
-    }
-    while ((maior_v%menor_v) != 0){
-        maior = maior_v%menor_v;
-        maior_v = menor_v;
-        menor_v = maior;
-    }
-    min = (a * b)/ maior;
-    return min;
+int mdc(int a, int b){
+    if (b==0) return a;
+    else return mdc(b, a%b);
+
 }
 
-int euclide(int a, int b){
-    int maior = 1, maior_v = a, menor_v = b;
-    if (b > maior_v){
-        maior_v = b;
-    }
-    if (a < menor_v){
-        menor_v = a;
-    }
-    while ((maior_v%menor_v) != 0){
-        maior = maior_v%menor_v;
-        maior_v = menor_v;
-        menor_v = maior;
-    }
-    return maior;
+int mmc(int a, int b){
+    return (a*b)/mdc(a,b);
 }
-
 fracao soma(fracao &f1, fracao &f2){
-    int m, somados;
-    m = mult(&f1.denominador, $f2.denominador)
-    somados = ((((&f1.numerador)*m)/&f1.denominador) + (((&f2.numerador)*m)/&f2.denominador))/m;
-    return somados;
+    fracao resultado;
+    resultado.denominador = mmc(f1.denominador, f2.denominador);
+    resultado.numerador = (f1.numerador*resultado.denominador/f1.denominador) + 
+                    (f2.numerador*resultado.denominador/f2.denominador);
+    int x = mdc(resultado.numerador, resultado.denominador);
+    resultado.numerador = resultado.numerador/x;
+    resultado.denominador = resultado.denominador/x;
+    return resultado;
 }
 
 int main(){
-    int a,b,c,d;
     fracao f1, f2;
-    f1.numerador = a;
-    f2.numerador = c;
-    f1.denominador = b;
-    f2.denominador = d;
-    fracao f3;
-    f3 = soma(f1,f2);
-
+    std::cin >> f1.numerador >> f1.denominador;
+    std::cin >> f2.numerador >> f2.denominador;
+    fracao f3 = soma(f1, f2);
+    std::cout << f3.numerador <<  "/" << f3.denominador << std::endl;
     return 0;
 }
