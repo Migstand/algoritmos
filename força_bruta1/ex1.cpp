@@ -14,12 +14,15 @@ char cabe(int abl, int abh, int ful, int fuh, int fdl, int fdh){
         maiorfd = fdh;
         menorfd = fdl;
     }
-    int subp = maiora - maiorfu; sub_m = men
+    int subp = maiora - maiorfu;
     char v;
     if (subp >= menorfd){
-        if (maiorfd <= menora){
-            v ='S';
+        if (menora >= menorfu){
+            if (maiorfd <= menora){
+                v ='S';
+            };
         };
+            
     }else {
         v ='N';
     }
